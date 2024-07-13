@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Component } from "react";
+import React, { Component, lazy } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 // import "@/styles/styles.scss";
@@ -36,12 +37,14 @@ export default function RootLayout({
     <GlobalProvider>
       <html lang="en">
         <body className={instrument.className}>
-          {children}
-          <ModalCart serverTimeLeft={serverTimeLeft} />
-          <ModalWishlist />
-          <ModalSearch />
-          <ModalQuickview />
-          <ModalCompare />
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+            <ModalCart serverTimeLeft={serverTimeLeft} />
+            <ModalWishlist />
+            <ModalSearch />
+            <ModalQuickview />
+            <ModalCompare />
+          </Suspense>
         </body>
       </html>
     </GlobalProvider>

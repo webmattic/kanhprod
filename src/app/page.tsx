@@ -1,4 +1,5 @@
 import React from "react";
+import { Suspense, lazy } from "react";
 import TopNavOne from "@/components/Header/TopNav/TopNavOne";
 import MenuOne from "@/components/Header/Menu/MenuOne";
 import SliderOne from "@/components/Slider/SliderOne";
@@ -15,6 +16,7 @@ import Brand from "@/components/Home1/Brand";
 import Footer from "@/components/Footer/Footer";
 import ModalNewsletter from "@/components/Modal/ModalNewsletter";
 
+const Loading = () => <div>Loading...</div>;
 export default function Home() {
   return (
     <>
@@ -24,18 +26,40 @@ export default function Home() {
       />
       <div id="header" className="relative w-full">
         <MenuOne props="bg-transparent" />
-        <SliderOne />
+        <Suspense fallback={<Loading />}>
+          <SliderOne />
+        </Suspense>
       </div>
-      <WhatNewOne data={productData} start={0} limit={4} />
-      <Collection />
-      <TabFeatures data={productData} start={0} limit={6} />
-      <Banner />
-      <Benefit props="md:py-20 py-10" />
-      <Testimonial data={testimonialData} limit={6} />
-      <Instagram />
-      <Brand />
-      <Footer />
-      <ModalNewsletter />
+      <Suspense fallback={<Loading />}>
+        <WhatNewOne data={productData} start={0} limit={4} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Collection />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <TabFeatures data={productData} start={0} limit={6} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Banner />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Benefit props="md:py-20 py-10" />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Testimonial data={testimonialData} limit={6} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Instagram />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Brand />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Footer />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <ModalNewsletter />
+      </Suspense>
     </>
   );
 }

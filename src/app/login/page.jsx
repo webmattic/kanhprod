@@ -6,8 +6,49 @@ import MenuOne from '@/components/Header/Menu/MenuOne'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Footer from '@/components/Footer/Footer'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
+import { signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
+
+
 
 const Login = () => {
+    const router = useRouter();
+
+    const submitHandler = async (data) => {
+        if (data.emailId === '' || data.password === '') {
+            alert('All fields are required!');
+            return;
+        }
+        console.log(data);
+        setCookie("email", data.emailId);
+
+        const resdata = await signIn("credentials", {
+            emailId: data.emailId,
+            password: data.password,
+            redirect: false,
+        });
+
+        console.log(resdata);
+        if (
+            resdata.status === 400 ||
+            resdata.status === 401 ||
+            resdata.status === 403
+        ) {
+            console.log("Invalid Credentials!");
+            alert('Invalid Credentials!');
+        } else if (resdata.status === 500) {
+            console.log(
+                "Server error!"
+            );
+            alert('Server error!');
+        } else {
+            alert('Login successfull!');
+            // router.push('/home');
+            console.log(resdata);
+        }
+    };
+
 
     return (
         <>
@@ -21,12 +62,18 @@ const Login = () => {
                     <div className="content-main flex gap-y-8 max-md:flex-col">
                         <div className="left md:w-1/2 w-full lg:pr-[60px] md:pr-[40px] md:border-r border-line">
                             <div className="heading4">Login</div>
-                            <form className="md:mt-7 mt-4">
+                            <form className="md:mt-7 mt-4" onSubmit={(e) => {
+                                e.preventDefault();
+                                submitHandler({
+                                    emailId: e.target.emailId.value,
+                                    password: e.target.password.value,
+                                });
+                            }}>
                                 <div className="email ">
-                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username" type="email" placeholder="Username or email address *" required />
+                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username" name='emailId' type="email" placeholder="Username or email address *" required />
                                 </div>
                                 <div className="pass mt-5">
-                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="password" type="password" placeholder="Password *" required />
+                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" name='password' id="password" type="password" placeholder="Password *" required />
                                 </div>
                                 <div className="flex items-center justify-between mt-5">
                                     <div className='flex items-center'>

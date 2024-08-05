@@ -18,10 +18,10 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 
 const validationSchema = Yup.object({
-  firstname: Yup.string().required("First name is required"),
-  lastname: Yup.string().required("Last name is required"),
-  mobile: Yup.string().required("Mobile number is required"),
-  email: Yup.string()
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  mobileNumber: Yup.string().required("mobileNumber number is required"),
+  emailId: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
   country: Yup.string().required("Country is required"),
@@ -38,15 +38,14 @@ const validationSchema = Yup.object({
 const Register = () => {
   const router = useRouter();
   const [country, setCountry] = useState([]);
-  const [state, setState] = useState([]);
-  const [city, setCity] = useState([]);
-  const [countryValue, setCountryValue] = useState('');
+
+  const baseURL = process.env.NEXT_PUBLIC_HOSTNAME + "register";
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
-      mobile: "",
-      email: "",
+      firstName: "",
+      lastName: "",
+      mobileNumber: "",
+      emailId: "",
       country: "",
       state: "",
       city: "",
@@ -56,35 +55,76 @@ const Register = () => {
       confirmpassword: "",
     },
     validationSchema,
-    onSubmit: async (values) => {
-      console.log(values);
-      if (values.password === values.confirmpassword) {
+    onSubmit: async (data) => {
+      console.log(data);
+
+      // console.log(values);
+      // if (values.password === values.confirmpassword) {
+      //   try {
+      //     await axios.post("/api/userApi", values);
+      //     alert("User registered successfully");
+      //     setCookie('user', JSON.stringify(values.firstName));
+      //     router.push("/UserDashbosrd");
+      //   } catch (error) {
+      //     console.error("Error registering user:", error);
+      //     alert("Error registering user");
+      //   }
+      // } else {
+      //   alert("Passwords do not match");
+      // }
+
+
+      // if (data.email === '' || data.password === '' || data.firstName === '' || data.lastName === '' || data.mobileNumber === '' || data.country === '' || data.state === '' || data.city === '' || data.street === '' || data.pincode === '') {
+      //   alert('All fields are required!');
+      //   return;
+      // }
+      if (data.password == data.confirmpassword) {
         try {
-          await axios.post("/api/userApi", values);
-          alert("User registered successfully");
-          setCookie('user', JSON.stringify(values.firstname));
-          router.push("/UserDashbosrd");
+          const requestBody = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            mobileNumber: data.mobileNumber,
+            emailId: data.emailId,
+            country: data.country,
+            state: data.state,
+            city: data.city,
+            street: data.street,
+            pincode: data.pincode,
+            password: data.password
+          }
+          await axios
+            .post(baseURL, requestBody)
+            .then(function (res) {
+              console.log(res.data);
+              alert('Account created!');
+              setCookie('mail', JSON.stringify(data.emailId));
+              router.push('/UserProfile');
+            })
+            .catch(error => {
+              console.log(error);
+            });
+
         } catch (error) {
           console.error("Error registering user:", error);
           alert("Error registering user");
+
         }
-      } else {
-        alert("Passwords do not match");
       }
+
     },
   });
 
   async function loadCountries() {
     await axios.get("https://countriesnow.space/api/v0.1/countries/states")
       .then((res) => {
-        setCountry(res.data.data.map((c: any) => c.name))
+        setCountry(res.data.data.map((c) => c.name))
 
       })
   }
-  
+
   useEffect(() => {
     loadCountries()
-    console.log(countryValue)
+    // console.log(countryValue)
   })
   return (
     <>
@@ -113,28 +153,28 @@ const Register = () => {
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg me-1"
                     id="username"
-                    name="firstname"
+                    name="firstName"
                     type="text"
                     placeholder="First Name"
                     onChange={formik.handleChange}
-                    value={formik.values.firstname}
+                    value={formik.values.firstName}
                     required
                   />
-                  {formik.errors.firstname && (
-                    <div>{formik.errors.firstname}</div>
+                  {formik.errors.firstName && (
+                    <div>{formik.errors.firstName}</div>
                   )}
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
                     id="username"
-                    name="lastname"
+                    name="lastName"
                     type="text"
                     placeholder="Last Name"
                     onChange={formik.handleChange}
-                    value={formik.values.lastname}
+                    value={formik.values.lastName}
                     required
                   />
-                  {formik.errors.firstname && (
-                    <div>{formik.errors.lastname}</div>
+                  {formik.errors.firstName && (
+                    <div>{formik.errors.lastName}</div>
                   )}
                 </div>
                 <div className=" mt-5 ">
@@ -142,49 +182,40 @@ const Register = () => {
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
                     id="username"
                     type="text"
-                    name="mobile"
-                    placeholder="Enter Mobile Number"
-                    value={formik.values.mobile}
+                    name="mobileNumber"
+                    placeholder="Enter mobileNumber"
+                    value={formik.values.mobileNumber}
                     onChange={formik.handleChange}
                     required
                   />
-                  {formik.errors.mobile && <div>{formik.errors.mobile}</div>}
+                  {formik.errors.mobileNumber && <div>{formik.errors.mobileNumber}</div>}
                 </div>
                 <div className="email mt-5">
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
                     id="username"
                     type="email"
-                    name="email"
+                    name="emailId"
                     placeholder=" Email address *"
                     onChange={formik.handleChange}
-                    required
-                    value={formik.values.email}
+                    require
+                    value={formik.values.emailId}
                   />
-                  {formik.errors.email && <div>{formik.errors.email}</div>}
+                  {formik.errors.emailId && <div>{formik.errors.emailId}</div>}
                 </div>
-                <div className="flex justify-between mb-5 mt-5 ">
+                <div className="mb-5 mt-5 ">
                   <div className=" ">
-                    {/* <input
-                      className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
-                      id="username"
-                      type="text"
-                      name="country"
-                      value={formik.values.country}
-                      placeholder="country name"
-                      onChange={formik.handleChange}
-                      required
-                    /> */}
-                    <Autocomplete
+                   
+                    {/* <Autocomplete
                       disablePortal
                       id="combo-box-demo"
                       options={country}
                       sx={{ width: 300 }}
                       renderInput={(params) => <TextField {...params} label="select country" name="country" onChange={(formik.handleChange)} />}
-                    />
-                    {formik.errors.country && (
+                    /> */}
+                    {/* {formik.errors.country && (
                       <div>{formik.errors.country}</div>
-                    )}
+                    )} */}
                   </div>
                   <div className=" ">
                     <input
@@ -295,7 +326,7 @@ const Register = () => {
                   </label>
                 </div>
                 <div className="block-button md:mt-7 mt-4">
-                  <button className="button-main">Register</button>
+                  <button className="button-main" type="submit">Register</button>
                 </div>
               </form>
             </div>

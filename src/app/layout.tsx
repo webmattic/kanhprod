@@ -18,6 +18,8 @@ import ModalCompare from "../components/Modal/ModalCompare";
 import CountdownTimeType from "../type/CountdownType";
 // import { countdownTime } from "@/store/countdownTime";
 import { countdownTime } from "../store/countdownTime";
+import AuthProvider from "./context/authprovider";
+
 
 const serverTimeLeft: CountdownTimeType = countdownTime();
 
@@ -38,7 +40,9 @@ export default function RootLayout({
       <html lang="en">
         <body className={instrument.className}>
           <Suspense fallback={<div>Loading...</div>}>
+            <AuthProvider>
             {children}
+            </AuthProvider>
             <ModalCart serverTimeLeft={serverTimeLeft} />
             <ModalWishlist />
             <ModalSearch />

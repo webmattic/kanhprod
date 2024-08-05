@@ -50,8 +50,8 @@ const UserSchema = new Schema({
     required: true,
     match: [/^\d{6}$/, "Please fill a valid 6-digit pincode"],
   },
-  password:{
-    type:String,
+  password: {
+    type: String,
     required: true,
     trim: true,
 
@@ -64,6 +64,6 @@ const UserSchema = new Schema({
 
 // Compile model from schema
 
-const User = mongoose.models.User || mongoose.model("User", UserSchema);
+const Users = mongoose.models.admindatas || mongoose.model("admindatas", UserSchema);
 
-export default User;
+export default Users;

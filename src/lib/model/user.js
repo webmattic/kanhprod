@@ -25,11 +25,7 @@ const UserSchema = new Schema({
     unique: true,
     match: [/.+\@.+\..+/, "Please fill a valid email address"],
   },
-  country: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+ 
   state: {
     type: String,
     required: true,

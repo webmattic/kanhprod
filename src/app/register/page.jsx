@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
   emailId: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  country: Yup.string().required("Country is required"),
+  
   state: Yup.string().required("State is required"),
   city: Yup.string().required("City is required"),
   street: Yup.string().required("Street is required"),
@@ -46,7 +46,7 @@ const Register = () => {
       lastName: "",
       mobileNumber: "",
       emailId: "",
-      country: "",
+      
       state: "",
       city: "",
       street: "",
@@ -78,7 +78,7 @@ const Register = () => {
       //   alert('All fields are required!');
       //   return;
       // }
-      if (data.password == data.confirmpassword) {
+      if (data.password === data.confirmpassword) {
         try {
           const requestBody = {
             firstName: data.firstName,
@@ -97,7 +97,7 @@ const Register = () => {
             .then(function (res) {
               console.log(res.data);
               alert('Account created!');
-              setCookie('mail', JSON.stringify(data.emailId));
+              setCookie('email', JSON.stringify(data.emailId));
               router.push('/UserProfile');
             })
             .catch(error => {
@@ -114,18 +114,18 @@ const Register = () => {
     },
   });
 
-  async function loadCountries() {
-    await axios.get("https://countriesnow.space/api/v0.1/countries/states")
-      .then((res) => {
-        setCountry(res.data.data.map((c) => c.name))
+  // async function loadCountries() {
+  //   await axios.get("https://countriesnow.space/api/v0.1/countries/states")
+  //     .then((res) => {
+  //       setCountry(res.data.data.map((c) => c.name))
 
-      })
-  }
+  //     })
+  // }
 
-  useEffect(() => {
-    loadCountries()
-    // console.log(countryValue)
-  })
+  // useEffect(() => {
+  //   loadCountries()
+  //   // console.log(countryValue)
+  // })
   return (
     <>
       <TopNavOne
@@ -152,7 +152,7 @@ const Register = () => {
                 <div className="flex justify-between mb-5 ">
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg me-1"
-                    id="username"
+                    id="firstname"
                     name="firstName"
                     type="text"
                     placeholder="First Name"
@@ -165,7 +165,7 @@ const Register = () => {
                   )}
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
-                    id="username"
+                    id="lastname"
                     name="lastName"
                     type="text"
                     placeholder="Last Name"
@@ -180,7 +180,7 @@ const Register = () => {
                 <div className=" mt-5 ">
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
-                    id="username"
+                    id="mobilenumber"
                     type="text"
                     name="mobileNumber"
                     placeholder="Enter mobileNumber"
@@ -193,7 +193,7 @@ const Register = () => {
                 <div className="email mt-5">
                   <input
                     className="border-line px-4 pt-3 pb-3 w-full rounded-lg"
-                    id="username"
+                    id="email"
                     type="email"
                     name="emailId"
                     placeholder=" Email address *"

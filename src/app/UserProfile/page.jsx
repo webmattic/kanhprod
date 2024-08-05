@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function UserProfile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -17,14 +18,21 @@ export default function UserProfile() {
     street: '',
     pincode: '',
   });
+  let route = useRouter();
+  function logoutClick() {
+    deleteCookie('email');
+    route.push('/login');
 
+
+  }
+var user = getCookie('email');
 
   useEffect(() => {
     fetchData();
   }, [])
 
   async function fetchData() {
-    const mail = getCookie('mail');
+    const mail = getCookie('email');
 
     axios.get('http://localhost:3000/api/login', {
       headers: {
@@ -73,11 +81,20 @@ export default function UserProfile() {
     setIsEditing(false);
   };
 
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">User Profile</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
+          <button
+            type="button"
+            onClick={logoutClick}
+            className=" py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-sm"
+          >
+            Logout
+          </button>
+          <h1>Wellcome -{user} </h1>
           {Object.keys(formData).map((key) => (
             <div key={key}>
               <label
@@ -124,6 +141,8 @@ export default function UserProfile() {
               Edit
             </button>
           )}
+
+
         </form>
       </div>
     </div>

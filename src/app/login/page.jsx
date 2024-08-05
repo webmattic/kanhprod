@@ -44,7 +44,7 @@ const Login = () => {
             alert('Server error!');
         } else {
             alert('Login successfull!');
-            // router.push('/home');
+            router.push('/UserProfile');
             console.log(resdata);
         }
     };

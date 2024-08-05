@@ -9,7 +9,7 @@ import connectDB from '../../../lib/db';
 connectDB()
 export async function POST(request) {
 
-    const { firstName, lastName, mobileNumber, emailId, country, state, city, street, pincode, password } = await request.json();
+    const { firstName, lastName, mobileNumber, emailId, state, city, street, pincode, password } = await request.json();
     const existingUser = await Users.findOne({ emailId });
     if (!existingUser) {
         // return new Response(data, {
@@ -20,7 +20,7 @@ export async function POST(request) {
         console.log('Data ', emailId, '   ', password, '   ', hashedPassword);
 
         // If user is created successfully, return a success message
-        const users = await Users.create({ firstName, lastName, mobileNumber, emailId, country, state, city, street, pincode, password: hashedPassword, createdAt: new Date() });
+        const users = await Users.create({ firstName, lastName, mobileNumber, emailId, state, city, street, pincode, password: hashedPassword, createdAt: new Date() });
 
         let data = JSON.stringify(users);
         console.log('users ', users);

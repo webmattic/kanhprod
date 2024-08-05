@@ -22,7 +22,7 @@ export const options: NextAuthOptions = {
                 lastName: { label: "Last Name", type: "text", placeholder: "" },
                 mobileNumber: { label: "Mobile", type: "text", placeholder: "" },
                 emailId: { label: "Email", type: "email", placeholder: "" },
-                country: { label: "Country", type: "text", placeholder: "" },
+               
                 state: { label: "State", type: "text", placeholder: "" },
                 city: { label: "City", type: "text", placeholder: "" },
                 street: { label: "Street", type: "text", placeholder: "" },
@@ -38,7 +38,7 @@ export const options: NextAuthOptions = {
                     lastname: credentials?.lastName,
                     mobile: credentials?.mobileNumber,
                     emailId: credentials?.emailId,
-                    country: credentials?.country,
+                   
                     state: credentials?.state,
                     city: credentials?.city,
                     street: credentials?.street,

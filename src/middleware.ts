@@ -4,6 +4,13 @@ export async function middleware(req: NextRequest) {
     console.log("running.....")
     let verified = req.cookies.get('email')
 
+    // if (!verified) {
+    //     return NextResponse.redirect(new URL('/login', req.url))    
+
+    // }
+
+    
+
     // let url = req.nextUrl.pathname
     // console.log(url)
     //  if (!verified && (req.nextUrl.pathname.startsWith('/about') || req.nextUrl.pathname.startsWith('/home'))) {

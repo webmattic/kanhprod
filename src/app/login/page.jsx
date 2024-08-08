@@ -166,7 +166,7 @@ const Login = () => {
                 alert('Server error!');
             } else {
                 alert('Login successful!');
-                router.push('/UserProfile');
+                router.push('/UserProfiledemo');
                 console.log(resdata);
             }
         }

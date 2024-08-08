@@ -429,7 +429,7 @@ const Register = () => {
             .then(function (res) {
               alert('Account created!');
               setCookie('email', JSON.stringify(data.emailId));
-              router.push('/UserProfile');
+              router.push('/UserProfiledemo');
             })
             .catch(error => {
               console.log(error);

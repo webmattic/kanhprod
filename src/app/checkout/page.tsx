@@ -214,7 +214,7 @@ const Checkout = () => {
                                             </div>
                                         </div>
                                         <div className="block-button md:mt-10 mt-6">
-                                            <button className="button-main w-full">Payment</button>
+                                            <button className="button-main w-full" type="submit" >Payment</button>
                                         </div>
                                     </form>
                                 </div>

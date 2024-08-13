@@ -8,12 +8,17 @@ import MenuOne from '@/components/Header/Menu/MenuOne'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Footer from '@/components/Footer/Footer'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
-import { useCart } from '@/context/CartContext'
+import { CartProvider, useCart } from '@/context/CartContext'
 import { countdownTime } from '@/store/countdownTime'
+import { useModalCartContext } from '@/context/ModalCartContext'
+import { useContext } from 'react'
+
+import Rate from '@/components/Other/Rate'
 
 const Cart = () => {
     const [timeLeft, setTimeLeft] = useState(countdownTime());
     const router = useRouter()
+    ;
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -68,6 +73,7 @@ const Cart = () => {
 
     const redirectToCheckout = () => {
         router.push(`/checkout?discount=${discountCart}&ship=${shipCart}`)
+
     }
 
     return (
@@ -321,7 +327,7 @@ const Cart = () => {
                                         <span className='heading5'>.00</span></div>
                                 </div>
                                 <div className="block-button flex flex-col items-center gap-y-4 mt-5">
-                                    <div className="checkout-btn button-main text-center w-full" onClick={redirectToCheckout}>Process To Checkout</div>
+                                    <div className="checkout-btn button-main text-center w-full" onClick={redirectToCheckout}>Process To Checkout </div>
                                     <Link className="text-button hover-underline" href={"/shop/breadcrumb1"}>Continue shopping</Link>
                                 </div>
                             </div>

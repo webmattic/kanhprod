@@ -56,9 +56,15 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  products: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "products",
+  },
+
+
 });
 
-// Compile model from schema
+
 
 const Users = mongoose.models.admindatas || mongoose.model("admindatas", UserSchema);
 

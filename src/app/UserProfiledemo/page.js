@@ -1,4 +1,4 @@
-// 
+
 
 "use client";
 
@@ -9,17 +9,20 @@ import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+
 export default function UserProfiledemo() {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
         mobileNumber: '',
         emailId: '',
-        country: '',
+        
         state: '',
         city: '',
         street: '',
-        pincode: ''
+        pincode: '',
+      
+
     });
     const [isEditing, setIsEditing] = useState(false);
     const [showOrders, setShowOrders] = useState(false);
@@ -31,8 +34,8 @@ export default function UserProfiledemo() {
     //     { itemname: "Kanh Diplomat", quantity: "1", price: "2400", deliver: "Mumbai" },
     //     { itemname: "Kanh Diplomat", quantity: "1", price: "2400", deliver: "Mumbai" },
     //     { itemname: "Kanh Diplomat", quantity: "1", price: "2400", deliver: "Mumbai" },
-    // ];/
-    
+    // ]
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -61,20 +64,20 @@ export default function UserProfiledemo() {
                     lastName: result.lastName,
                     mobileNumber: result.mobileNumber,
                     emailId: result.emailId,
-                    country: result.country,
+                 
                     state: result.state,
                     city: result.city,
                     street: result.street,
                     pincode: result.pincode,
+                  
+
                 });
-                
-                setProductData(result.product || []);
-                alert(productData);
-            
-            
+                try {
+                    setProductData(result.product || []);
+                } catch (error) {
+                    console.error(error);
+                }
                 // alert(productData);
-
-
 
             }
         }).catch(error => {
@@ -140,31 +143,50 @@ export default function UserProfiledemo() {
                                         <th className="px-6 py-3" scope="col">Deliver Address</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {productData.map((data) => (
-                                        <tr key={data.itemname} className="bg-white border-b">
+
+                                {/* <tbody>
+                                    {productData.map((data, index) => (
+                                        alert(data),
+
+                                        <tr key={index} className="bg-white border-b">
+
                                             <td scope="row" className="font-medium whitespace-nowrap">{data.itemname}</td>
-                                            <td className="px-6 py-4">{data.itemname}</td>
+                                            <td className="px-6 py-4">{data.quantity}</td>
                                             <td className="px-6 py-4">{data.price}</td>
                                             <td className="px-6 py-4">{data.deliver}</td>
                                         </tr>
                                     ))}
+                                </tbody> */}
+                                <tbody>
+                                    {productData.map((data, index) => {
+                                        alert(data);
+                                        console.log( "ProductDetails", data);
+                                        return (
+                                            <tr key={index} className="bg-white border-b">
+                                                <td scope="row" className="font-medium whitespace-nowrap">{data.itemname}</td>
+                                                <td className="px-6 py-4">{data.quantity}</td>
+                                                <td className="px-6 py-4">{data.price}</td>
+                                                <td className="px-6 py-4">{data.deliver}</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
                 ) : (
                     <div className="p-3 ms-10 mt-10">
                         <div className="border-b flex justify-between py-4 me-20">
-                            <p className="text-3xl font-bold">Your Profile</p>
+                            <p className="text-2xl font-bold">Your Profile</p>
                             <button
-                                className="px-12 bg-yellow-400 text-black font-semibold rounded hover:bg-yellow-500"
+                                className="px-12 font-extrabold bg-yellow-400 text-black  rounded hover:bg-yellow-500"
                                 onClick={handleEditToggle}
                             >
                                 {isEditing ? "Save" : "Edit"}
                             </button>
                         </div>
-                        <div className="overflow-x-auto max-w-sm mt-9 ms-2">
+                        <div className="overflow-x-auto max-w-xs mt-9 ms-2">
                             <form onSubmit={formik.handleSubmit}>
                                 {Object.keys(user).map((key) => (
                                     key !== "_id" && key !== "password" && key !== "__v" && key !== "createdAt" && (
@@ -178,8 +200,12 @@ export default function UserProfiledemo() {
                                                 value={formik.values[key] || ""}
                                                 onChange={formik.handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full px-3 py-2 border rounded ${isEditing ? 'bg-white border-gray-300' : 'bg-gray-100 border-transparent'}`}
+                                                
+                                                className={`w-full px-3 py-2 border rounded font-semibold ${isEditing ? 'bg-white border-gray-300' : 'bg-transparent border-transparent focus:outline-none cursor-default'}`}
+
                                             />
+                                            {formik.errors[key] && <div>{formik.errors[key]}</div>}
+
                                         </div>
                                     )
                                 ))}

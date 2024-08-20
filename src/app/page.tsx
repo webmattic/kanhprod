@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Suspense, lazy } from "react";
 import TopNavOne from "@/components/Header/TopNav/TopNavOne";
 import MenuOne from "@/components/Header/Menu/MenuOne";
@@ -16,8 +18,41 @@ import Brand from "@/components/Home1/Brand";
 import Footer from "@/components/Footer/Footer";
 import ModalNewsletter from "@/components/Modal/ModalNewsletter";
 
+
 const Loading = () => <div>Loading...</div>;
 export default function Home() {
+  // const [productData, setProductData] = useState([]);
+
+  // const getProducts = async () => {
+  //   try { 
+  //     const response = await fetch("/api/getProducts");
+  //     const data = await response.json();
+  //     setProductData(data);
+  //   } catch (error) {
+  //     console.error("Error fetching products:", error); 
+  //   }
+  // };
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
+
+  type Product = {
+    _id: string;
+    name: string;
+    brand: string;
+    sold: number;
+    quantity: number;
+    quantityPurchase: number;
+    sizes: string;
+    variation: string;
+    thumbImage: string;
+    images: string;
+    description: string;
+    action: string;
+    slug: string;
+  };
+
+
   return (
     <>
       <TopNavOne
@@ -31,7 +66,7 @@ export default function Home() {
         </Suspense>
       </div>
       <Suspense fallback={<Loading />}>
-        <WhatNewOne data={productData} start={0} limit={4} />
+        <WhatNewOne data={productData}  start={0} limit={4} />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Collection />

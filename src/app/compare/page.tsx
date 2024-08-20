@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import TopNavOne from '@/components/Header/TopNav/TopNavOne'
@@ -19,6 +19,13 @@ const Compare = () => {
     const { compareState } = useCompare();
     const { cartState, addToCart, updateCart } = useCart();
     const { openModalCart } = useModalCartContext();
+    // const [productData, setProductData] = useState([])
+    // useEffect(() => {
+    //     fetch('/data/Product.json')
+    //         .then(res => res.json())
+    //         .then(data => setProductData(data))
+    // })
+
 
     const handleAddToCart = (productItem: ProductType) => {
         if (!cartState.cartArray.find(item => item.id === productItem.id)) {

@@ -5,6 +5,7 @@ import Product from '../Product/Product'
 import { ProductType } from '@/type/ProductType'
 import { motion } from 'framer-motion'
 
+
 interface Props {
     data: Array<ProductType>;
     start: number;

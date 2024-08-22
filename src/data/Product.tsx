@@ -8,7 +8,7 @@ import { ProductType } from '@/type/ProductType'
 
 export default async function productData() {
 
-    const res = axios.get("http://localhost:3000/api/getProducts");
+    const res = await axios.get("http://localhost:3000/api/getProducts");
     return res;
 }
 

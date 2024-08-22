@@ -53,6 +53,10 @@ const ShopBreadCrumbImg: React.FC<Props> = ({ data, productPerPage, dataType }) 
         setType((prevType) => (prevType === type ? null : type))
         setCurrentPage(0);
     }
+    const handleCategoryClick = (category: string) => {
+        setType((prevType) => (prevType === category ? null : category))
+        setCurrentPage(0);
+    }
 
     const handleSize = (size: string) => {
         setSize((prevSize) => (prevSize === size ? null : size))
@@ -223,7 +227,7 @@ const ShopBreadCrumbImg: React.FC<Props> = ({ data, productPerPage, dataType }) 
                                 </div>
                             </div>
                             <div className="list-tab flex flex-wrap items-center justify-center gap-y-5 gap-8 lg:mt-[70px] mt-12 overflow-hidden">
-                                {['t-shirt', 'dress', 'top', 'swimwear', 'shirt'].map((item, index) => (
+                                {['Formal', 'Party Wear', 'Casual', 'Sports' , "top" ,"food" ,"dress","swimwear",'eye'].map((item, index) => (
                                     <div
                                         key={index}
                                         className={`tab-item text-button-uppercase cursor-pointer has-line-before line-2px ${dataType === item ? 'active' : ''}`}
@@ -234,7 +238,7 @@ const ShopBreadCrumbImg: React.FC<Props> = ({ data, productPerPage, dataType }) 
                                 ))}
                             </div>
                         </div>
-                        <div className="bg-img absolute top-2 -right-6 max-lg:bottom-0 max-lg:top-auto w-1/3 max-lg:w-[26%] z-[0] max-sm:w-[45%]">
+                        {/* <div className="bg-img absolute top-2 -right-6 max-lg:bottom-0 max-lg:top-auto w-1/3 max-lg:w-[26%] z-[0] max-sm:w-[45%]">
                             <Image
                                 src={'/images/slider/bg1-1.png'}
                                 width={1000}
@@ -242,7 +246,7 @@ const ShopBreadCrumbImg: React.FC<Props> = ({ data, productPerPage, dataType }) 
                                 alt=''
                                 className=''
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

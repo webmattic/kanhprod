@@ -19,6 +19,7 @@ export default function Default() {
             <div id="header" className='relative w-full'>
                 <MenuOne props="bg-transparent" />
             </div>
+           
             <ShopBreadCrumbImg data={productData} productPerPage={12} dataType={type} />
             <Footer />
         </>

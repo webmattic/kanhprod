@@ -75,7 +75,7 @@ export default function Home() {
         <TabFeatures data={productData} start={0} limit={6} />
       </Suspense>
       <Suspense fallback={<Loading />}>
-        <Banner />
+        {/* <Banner /> */}
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Benefit props="md:py-20 py-10" />
@@ -84,10 +84,10 @@ export default function Home() {
         <Testimonial data={testimonialData} limit={6} />
       </Suspense>
       <Suspense fallback={<Loading />}>
-        <Instagram />
+        {/* <Instagram /> */}
       </Suspense>
       <Suspense fallback={<Loading />}>
-        <Brand />
+        {/* <Brand /> */}
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Footer />

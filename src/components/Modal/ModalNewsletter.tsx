@@ -32,7 +32,7 @@ const ModalNewsletter = () => {
             e.stopPropagation();
           }}
         >
-          <div className="main-content flex rounded-[20px] overflow-hidden w-full">
+          <div className="main-content flex rounded-[20px] overflow-hidden w-full bg-lime-300">
             <div className="left lg:w-1/2 sm:w-2/5 max-sm:hidden bg-brand_lighter flex flex-col items-center justify-center gap-5 py-14">
               <div className="text-xs font-semibold uppercase text-center">
                 Special Offer

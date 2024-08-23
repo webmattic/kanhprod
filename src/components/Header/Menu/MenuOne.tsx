@@ -30,6 +30,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
   const { cartState } = useCart();
   const { openModalWishlist } = useModalWishlistContext();
   const { openModalSearch } = useModalSearchContext();
+  const [linknavigate, setLinknavigate] = useState<string | null>(null);
 
   const handleOpenSubNavMobile = (index: number) => {
     setOpenSubNavMobile(openSubNavMobile === index ? null : index);
@@ -60,6 +61,8 @@ const MenuOne: React.FC<Props> = ({ props }) => {
 
   const handleCategoryClick = (category: string) => {
     router.push(`/shop/breadcrumb1?category=${category}`);
+    setLinknavigate(`/shop/breadcrumb1?category=${category}`);
+
   };
 
   const handleTypeClick = (type: string) => {
@@ -103,6 +106,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
               <div className="menu-main h-full max-lg:hidden">
                 <ul className="flex items-center gap-8 h-full">
                   <li className="h-full relative">
+
                     <Link
                       href="/"
                       className={`text-button-uppercase duration-300 h-full flex items-center justify-center gap-1 ${pathname === "/" ? "active" : ""
@@ -317,43 +321,136 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                     <div className="mega-menu absolute top-[74px] left-0 bg-white w-screen">
                       <div className="container">
                         <div className="flex justify-between py-8">
-                          <div className="nav-link basis-2/3 grid grid-cols-4 gap-y-8">
+                          <div className="nav-link">
                             <div className="nav-item">
                               {/* <div className="text-button-uppercase pb-2">
                                 For Men
                               </div> */}
-                              <ul>
+                              <ul className="list-none grid grid-cols-4 gap-4 pt-2">
                                 <li>
-                                  <div
-                                    onClick={() => handleCategoryClick("Formal")}
-                                    className={`link text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105`}
-                                  >
-                                    Formal Wear
+                                  {/* <div>
+                                    <img src="/images/kanh-shirts/formal-shirts/formal-2.webp" alt="" />
+                                    
+                                    <div
+                                      onClick={() => handleCategoryClick("Formal")}
+                                      className={`link text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105`}
+                                    >
+                                      Formal Wear
+                                    </div>
+                                  </div> */}
+                                  <div className="relative group cursor-pointer">
+                                    <a href="#!" className="block"
+                                      onClick={() => handleCategoryClick("Formal")}>
+                                      <img
+                                        src="/images/kanh-shirts/formal-shirts/formal-2.webp"
+                                        alt="Formal Wear"
+                                        className="w-full h-auto object-cover rounded-lg transition-transform transform group-hove"
+                                      />
+                                    </a>
+                                    <div
+                                      onClick={() => handleCategoryClick("Formal")}
+                                      className="mt-2 text-center"
+                                    >
+                                      <a
+                                        href="#!"
+                                        onClick={() => handleCategoryClick("Formal")}
+                                        className="block text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                                      >
+                                        Formal Wear
+                                      </a>
+                                    </div>
                                   </div>
+
 
                                 </li>
                                 <li>
-                                  <div
+                                  {/* <div
                                     onClick={() => handleCategoryClick("Party Wear")}
                                     className={`link text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105`}
                                   >
                                     Party Wear
+                                  </div> */}
+                                  <div className="relative group cursor-pointer">
+                                    <a href="#!" className="block"
+                                      onClick={() => handleCategoryClick("Party Wear")}>
+                                      <img
+                                        src="/images/kanh-shirts/party-shirts/party-1.webp"
+                                        alt=" Party Wear"
+                                        className="w-full h-auto object-cover rounded-lg transition-transform transform group-hover:scale-105"
+                                      />
+                                    </a>
+                                    <div
+                                      onClick={() => handleCategoryClick("Party Wear")}
+                                      className="mt-2 text-center"
+                                    >
+                                      <a
+                                        href="#!"
+                                        onClick={() => handleCategoryClick("Party Wear")}
+                                        className="block text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                                      >
+                                        Party Wear
+                                      </a>
+                                    </div>
                                   </div>
                                 </li>
                                 <li>
-                                  <div
+                                  {/* <div
                                     onClick={() => handleCategoryClick("Casual")}
                                     className={`link text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105`}
                                   >
                                     Casual Wear
+                                  </div> */}
+                                  <div className="relative group cursor-pointer">
+                                    <a href="#!" className="block"
+                                      onClick={() => handleCategoryClick("Casual")}>
+                                      <img
+                                        src="/images/kanh-shirts/casual-shirts/casual-1.webp"
+                                        alt="Casual Wear"
+                                        className="w-full h-auto object-cover rounded-lg transition-transform transform group-hover:scale-105"
+                                      />
+                                    </a>
+                                    <div
+                                      onClick={() => handleCategoryClick("Casual")}
+                                      className="mt-2 text-center"
+                                    >
+                                      <a
+                                        href="#!"
+                                        onClick={() => handleCategoryClick("Casual")}
+                                        className="block text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                                      >
+                                        Casual Wear
+                                      </a>
+                                    </div>
                                   </div>
                                 </li>
                                 <li>
-                                  <div
+                                  {/* <div
                                     onClick={() => handleCategoryClick("Sports")}
                                     className={`link text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105`}
                                   >
                                     Sports Wear
+                                  </div> */}
+                                  <div className="relative group cursor-pointer">
+                                    <a href="#!" className="block"
+                                      onClick={() => handleCategoryClick("Sports")}>
+                                      <img
+                                        src="/images/kanh-shirts/sports/sports-4.webp"
+                                        alt="Sports Wear"
+                                        className="w-full h-auto object-cover rounded-lg transition-transform transform group-hover:scale-105"
+                                      />
+                                    </a>
+                                    <div
+                                      onClick={() => handleCategoryClick("Sports")}
+                                      className="mt-2 text-center"
+                                    >
+                                      <a
+                                        href="#!"
+                                        onClick={() => handleCategoryClick("Sports")}
+                                        className="block text-secondary duration-300 cursor-pointer text-lg font-semibold hover:text-primary hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                                      >
+                                        Sports Wear
+                                      </a>
+                                    </div>
                                   </div>
                                 </li>
                                 <li>
@@ -661,7 +758,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                               </ul>
                             </div> */}
                           </div>
-                          <div className="banner-ads-block pl-2.5 basis-1/3">
+                          {/* <div className="banner-ads-block pl-2.5 basis-1/3">
                             <div
                               className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer"
                               onClick={() => handleTypeClick("swimwear")}
@@ -713,7 +810,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                 className="basis-1/3 absolute right-0 top-0 duration-700"
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>

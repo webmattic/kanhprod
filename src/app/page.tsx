@@ -66,7 +66,7 @@ export default function Home() {
         </Suspense>
       </div>
       <Suspense fallback={<Loading />}>
-        <WhatNewOne data={productData}  start={0} limit={4} />
+        <WhatNewOne data={productData} start={0} limit={4} />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Collection />
@@ -74,21 +74,15 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <TabFeatures data={productData} start={0} limit={6} />
       </Suspense>
-      <Suspense fallback={<Loading />}>
-        {/* <Banner /> */}
-      </Suspense>
+      
       <Suspense fallback={<Loading />}>
         <Benefit props="md:py-20 py-10" />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Testimonial data={testimonialData} limit={6} />
       </Suspense>
-      <Suspense fallback={<Loading />}>
-        {/* <Instagram /> */}
-      </Suspense>
-      <Suspense fallback={<Loading />}>
-        {/* <Brand /> */}
-      </Suspense>
+     
+    
       <Suspense fallback={<Loading />}>
         <Footer />
       </Suspense>

@@ -24,7 +24,7 @@ const Cart = () => {
     const [daysvalue, setDaysvalue] = useState<{ [key: string]: number }>({});
     const [timeLeft, setTimeLeft] = useState(countdownTime());
     const router = useRouter();
-
+ 
     const handleChangeDays = (event: SelectChangeEvent) => {
         const { name, value } = event.target;
         setSelectedDays((prevSelectedDays) => ({
@@ -169,8 +169,9 @@ const Cart = () => {
                                     <div className="list-product-main w-full mt-3">
                                         {cartState.cartArray.length < 1 ? (
                                             <p className='text-button pt-3'>No product in cart</p>
+
                                         ) : (
-                                            cartState.cartArray.map((product) => (
+                                            cartState.cartArray.map((product ) => (
                                                 <div className="item flex md:mt-7 md:pb-7 mt-5 pb-5 border-b border-line w-full" key={product.id}>
                                                     <div className="w-1/2">
                                                         <div className="flex items-center gap-6">
@@ -193,7 +194,7 @@ const Cart = () => {
                                                         <div className="text-title text-center"> ${product.price}.00</div>
                                                     </div>
                                                     <div className="w-1/6 flex items-center justify-center">
-                                                        <div className="quantity-block bg-surface p-1 flex items-center justify-between rounded-lg flex-shrink-0 w-auto space-x-2">
+                                                        <div className="quantity-block bg-surface p-1 flex items-center  rounded-lg flex-shrink-0 w-auto space-x-2 shadow  ">
                                                             <Icon.Minus
                                                                 onClick={() => {
                                                                     if (product.quantity > 1) {
@@ -207,22 +208,7 @@ const Cart = () => {
                                                                 onClick={() => handleQuantityChange(product.id, product.quantity + 1)}
                                                                 className='text-sm'
                                                             />
-                                                            <Box sx={{ minWidth: 80 }}>
-                                                                <FormControl fullWidth size="small">
-                                                                    <Select
-                                                                        labelId="demo-simple-select-label"
-                                                                        id="demo-simple-select"
-                                                                        value={selectedDays[product.id] || 1}
-                                                                        onChange={(e) => handleDaysChange(product.id, e)}
-                                                                    >
-                                                                        {[...Array(6)].map((_, i) => (
-                                                                            <MenuItem key={i + 1} value={i + 1}>
-                                                                                {i + 1} {i === 0 ? "Day" : "Days"}
-                                                                            </MenuItem>
-                                                                        ))}
-                                                                    </Select>
-                                                                </FormControl>
-                                                            </Box>
+
                                                         </div>
                                                     </div>
                                                     <div className="w-1/6 total-price flex items-center justify-center">
@@ -252,20 +238,20 @@ const Cart = () => {
                             </div>
                             <div className="summary">
                                 <div className="flex justify-between mb-2">
-                                    <div className="text-title">Subtotal</div>
-                                    <div className="text-title">${totalCart}.00</div>
+                                    <div className="text-title">Subtotal </div>
+                                    <div className="text-title">{totalCart}.00</div>
                                 </div>
                                 <div className="flex justify-between mb-2">
                                     <div className="text-title">Shipping</div>
-                                    <div className="text-title">${shipCart}.00</div>
+                                    <div className="text-title">{shipCart}.00</div>
                                 </div>
                                 <div className="flex justify-between mb-2">
                                     <div className="text-title">Discount</div>
-                                    <div className="text-title">${discountCart}.00</div>
+                                    <div className="text-title">{discountCart}.00</div>
                                 </div>
                                 <div className="flex justify-between mb-4">
                                     <div className="text-title">Total</div>
-                                    <div className="text-title">${totalCart + shipCart - discountCart}.00</div>
+                                    <div className="text-title">{totalCart + shipCart - discountCart}.00</div>
                                 </div>
                                 <button
                                     onClick={redirectToCheckout}
